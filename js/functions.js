@@ -285,6 +285,7 @@ function checkAdPos() {
     }
 }
 
+/*
 function fontSizeNames(className,divisor) {
     $(className).each(function(){
         var maxHeight = parseInt( $(this).height() / divisor );
@@ -300,11 +301,12 @@ function checkFonts() {
     fontSizeNames('.gridbox',2.05);
     fontSizeNames('.gridcenter',1.2);
 }
+*/
 
 $(document).ready(function() {
     checkHash();
     checkAdPos();
-    checkFonts();
+    //checkFonts();
 });
 
 var didScroll = false;
@@ -313,9 +315,11 @@ $(window).scroll(function() {
     didScroll = true;    
 });
 
+/*
 $(window).resize(function() {
     checkFonts();
 });
+*/
 
 setInterval(function() {
     if ( didScroll ) {
