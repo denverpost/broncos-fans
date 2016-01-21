@@ -64,7 +64,8 @@ function playerCreator(embedId, playerId, divId) {
     if (divId) {
         $(divId).animate({backgroundColor:'rgba(0,70,70,0.3)',paddingLeft:'.5em',paddingRight:'.5em'}, 350).delay(2000).animate({backgroundColor:'transparent',paddingLeft:'0',paddingRight:'0'},1000);
     }
-    OO.Player.create(embedId, playerId, {autoplay:true});
+    $('#' + embedId).find('.vid-embed-play').css('display','none');
+    $('#' + embedId).append('<iframe src="http://launch.newsinc.com/?type=VideoPlayer/Single&widgetId=1&trackingGroup=90115&siteSection=denverpost&playlistId=18572&videoId=' + playerId + '" class="informvideo" noscroll style="width:100%; height:100%;" frameborder="no" scrolling="no" noresize></iframe>');
 }
 
 function playerScroller(embedId, playerId, divId) {
@@ -165,6 +166,7 @@ function getAdSize() {
 var gridOpen = false;
 
 function swapGridBox(box) {
+    console.log(box);
     if ( !$(box).hasClass('expanded') ) {
         $(box).parent('li').siblings().css('display','none');
         $(box).parents('ul').removeClass('large-block-grid-3');
@@ -193,6 +195,8 @@ function swapGridBox(box) {
         $(box).addClass('clickable');
         scrollDownTo('#profiles');
         $('body').css('background-color','rgba(255,255,255,1)');
+        $('.vid-embed-play').each(function(){$(this).css('display','block');});
+        $('.informvideo').each(function(){$(this).remove();});
         playerClear = false;
         gridOpen = false;
     }
@@ -218,8 +222,8 @@ $('.boxclose').on("click", function(e) {
 });
 
 $('body').on("click", function(e) {
-    e.stopImmediatePropagation();
     if (gridOpen) {
+        e.stopImmediatePropagation();
         var container = $('.gridbox.expanded');
         var adWrap = $('#adwrapper');
         var video = $('.gridbox.expanded .inset-video-center');
@@ -228,7 +232,6 @@ $('body').on("click", function(e) {
             && !video.is(e.target) && video.has(e.target).length === 0
             && (e.target != $('html').get(0) ) )
         {
-            console.log(e.target);
             swapGridBox(container);
         }
     }
@@ -237,6 +240,15 @@ $('body').on("click", function(e) {
 $('.gridprofile').scroll(function(){
     $(this).siblings('.gridphotograd').animate({opacity:'0'},700);
 });
+
+function openNext(clicked) {
+    var thisOne = $(clicked).closest('.gridbox.expanded');
+    var nextOne = $(thisOne).parent('li').next('li').children('.gridbox.clickable');
+    swapGridBox(thisOne);
+    swapGridBox(nextOne);
+    nextOneVid = $(nextOne).find('.vid-embed');
+    nextOneVid.click();
+}
 
 function showAd() {
     var adSize = getAdSize();
