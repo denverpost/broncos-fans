@@ -179,7 +179,7 @@ function swapGridBox(box) {
         $(box).addClass('expanded');
         $(box).removeClass('clickable');
         scrollDownTo('#profiles');
-        $('body').css('background-color','rgba(0,0,0,0.7)');
+        $('body').css('background-color','rgba(0,34,68,0.7)');
         playerClear = false;
         gridOpen = true;
     } else if (!playerClear) {
