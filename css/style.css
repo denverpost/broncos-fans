@@ -360,10 +360,10 @@ section.inset.right.chart h3.subheading {
 .gridphoto .gridprofile h2 {
     color: #FB4F14;
     font-family:'Didact Gothic',Helvetica,Arial,sans-serif!important;
-    font-size:7em;
-    letter-spacing:3px;
+    font-size:5em;
+    letter-spacing:2px;
     line-height:1.2;
-    margin:.25em auto;
+    margin:.25em;
 }
 .gridphoto .gridprofile p.caption {
     font-size:1.05em;
@@ -1174,7 +1174,7 @@ div#footer-bar ul.social li {
         padding: 0 5%;
     }
     .gridcentersmall h1.gridcaption {
-        font-size:7.25em;
+        font-size:5em;
         padding:0 .5em .25em;
     }
 }
