@@ -166,7 +166,6 @@ function getAdSize() {
 var gridOpen = false;
 
 function swapGridBox(box) {
-    console.log(box);
     if ( !$(box).hasClass('expanded') ) {
         $(box).parent('li').siblings().css('display','none');
         $(box).parents('ul').removeClass('large-block-grid-3');
@@ -240,14 +239,14 @@ $('body').on("click", function(e) {
 $('.gridprofile').scroll(function(){
     $(this).siblings('.gridphotograd').animate({opacity:'0'},700);
 });
-
+var nextOne ='';
 function openNext(clicked) {
     var thisOne = $(clicked).closest('.gridbox.expanded');
-    var nextOne = $(thisOne).parent('li').next('li').children('.gridbox.clickable');
-    swapGridBox(thisOne);
-    swapGridBox(nextOne);
-    nextOneVid = $(nextOne).find('.vid-embed');
-    nextOneVid.click();
+    nextOne = $(thisOne).parent('li').next('li').find('.gridbox.clickable');
+    $.when(swapGridBox(thisOne)).then(function() {
+        setTimeout(function(){nextOne.click();},300);
+        $(nextOne).find('.vid-embed').click();
+    });
 }
 
 function showAd() {
