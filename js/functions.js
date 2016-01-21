@@ -178,7 +178,7 @@ function swapGridBox(box) {
         $(box).addClass('expanded');
         $(box).removeClass('clickable');
         scrollDownTo('#profiles');
-        $('body').css('background-color','rgba(0,34,68,0.7)');
+        $('body').css('background-color','rgba(0,34,68,0.9)');
         playerClear = false;
         gridOpen = true;
     } else if (!playerClear) {
@@ -239,13 +239,22 @@ $('body').on("click", function(e) {
 $('.gridprofile').scroll(function(){
     $(this).siblings('.gridphotograd').animate({opacity:'0'},700);
 });
-var nextOne ='';
+
 function openNext(clicked) {
     var thisOne = $(clicked).closest('.gridbox.expanded');
-    nextOne = $(thisOne).parent('li').next('li').find('.gridbox.clickable');
+    var nextOne = $(thisOne).parent('li').next('li').find('.gridbox.clickable');
     $.when(swapGridBox(thisOne)).then(function() {
         setTimeout(function(){nextOne.click();},300);
         $(nextOne).find('.vid-embed').click();
+    });
+}
+
+function openPrev(clicked) {
+    var thisOne = $(clicked).closest('.gridbox.expanded');
+    var prevOne = $(thisOne).parent('li').prev('li').find('.gridbox.clickable');
+    $.when(swapGridBox(thisOne)).then(function() {
+        setTimeout(function(){prevOne.click();},300);
+        $(prevOne).find('.vid-embed').click();
     });
 }
 
